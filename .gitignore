@@ -1,5 +1,12 @@
-/*.log
 /target
-/*-init.clj
+/checkouts
+/docs
+/.lein-*
+/.nrepl-port
 /resources/public/js/compiled
+/*-init.clj
+/*.log
+/.rebel_readline_history
+/public/js/compiled
 out
+

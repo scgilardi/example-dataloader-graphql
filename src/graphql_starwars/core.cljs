@@ -1,20 +1,17 @@
 (ns graphql-starwars.core
-  (:require-macros
-   [reagent.ratom :refer [reaction]])
   (:require
-   [reagent.core :as reagent]
    [keechma.app-state :as app-state]
-   [graphql-starwars.controllers :refer [controllers]]
-   [graphql-starwars.ui :refer [ui]]
-   [graphql-starwars.subscriptions :refer [subscriptions]]))
+   [graphql-starwars.components :as components]
+   [graphql-starwars.controllers :as controllers]
+   [graphql-starwars.subscriptions :as subscriptions]))
 
 (def app-definition
-  {:components    ui 
-   :controllers   controllers 
-   :subscriptions subscriptions 
+  {:components    components/system
+   :controllers   controllers/controllers
+   :subscriptions subscriptions/subscriptions
    :html-element  (.getElementById js/document "app")})
 
-(defonce running-app (clojure.core/atom))
+(defonce running-app (clojure.core/atom nil))
 
 (defn start-app! []
   (reset! running-app (app-state/start! app-definition)))

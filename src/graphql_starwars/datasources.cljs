@@ -18,7 +18,7 @@
 (defn gql-req [params]
   (->> (POST gql-endpoint
              {:format :json
-              :params (:graphql params) 
+              :params (:graphql params)
               :response-format :json
               :keywords? true})
        (p/map (gql-results-handler (:unpack params)))))
@@ -31,50 +31,50 @@
             variables (reduce (fn [acc p] (assoc acc (:id p) (:variables p))) {} clean-params)
             composed-fn (gql-core/composed-query graphql queries)
             req-promise (gql-req (composed-fn variables))]
-           (map (fn [param]
-                  (when param
-                    (p/map #(get % (:id param)) req-promise))) params))
+        (map (fn [param]
+               (when param
+                 (p/map #(get % (:id param)) req-promise))) params))
       params)))
 
 (defn result-extract [resource]
   (let [query-name (str "all" (str/capitalize resource))]
-    (fn [res]
+    (fn result-extract [res]
       {:meta {:count (get-in res [query-name :totalCount])}
        :data (get-in res [query-name (keyword resource)])})))
 
 (defn make-params [resource]
-  (fn [_ {:keys [columns]} _]
+  (fn make-params [_ {:keys [columns]} _]
     (when (contains? (set columns) resource)
       {:query (str "Load" (str/capitalize resource))
        :variables {}})))
 
 (def datasources
   {:films {:target    [:edb/collection :film/list]
-           :params    (make-params "films") 
+           :params    (make-params "films")
            :loader    graphql-loader
            :processor (result-extract "films")}
 
    :species {:target    [:edb/collection :species/list]
-             :params    (make-params "species") 
+             :params    (make-params "species")
              :loader    graphql-loader
              :processor (result-extract "species")}
 
    :starships {:target    [:edb/collection :starship/list]
-               :params    (make-params "starships") 
+               :params    (make-params "starships")
                :loader    graphql-loader
                :processor (result-extract "starships")}
 
    :people {:target    [:edb/collection :person/list]
-            :params    (make-params "people") 
+            :params    (make-params "people")
             :loader    graphql-loader
             :processor (result-extract "people")}
 
    :planets {:target    [:edb/collection :planet/list]
-             :params    (make-params "planets") 
+             :params    (make-params "planets")
              :loader    graphql-loader
              :processor (result-extract "planets")}
 
    :vehicles {:target    [:edb/collection :vehicle/list]
-              :params    (make-params "vehicles") 
+              :params    (make-params "vehicles")
               :loader    graphql-loader
               :processor (result-extract "vehicles")}})
