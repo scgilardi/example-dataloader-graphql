@@ -99,9 +99,10 @@
 ;; ## Events
 
 (defn on-key>
-  "Returns a function to dispatch a `KeyboardEvent` to an event
-  `handler` based on its `KeyboardEvent.key` value. The `key-handlers`
-  mapping can be passed in as a `map` or inline `key`s and `value`s.
+  "Returns an `event handler` that uses a `KeyboardEvent`'s `key` value
+  to dispatch it to one of several other `event handler`s. The
+  `key-handlers` mapping can be passed in as a `map` or inline `key`s
+  and `value`s.
 
   Each entry in `key-handlers` maps a `keyword` to a `handler`. A
   `keyword` matches a `KeyboardEvent.key` value if `(name keyword)` is
@@ -109,7 +110,7 @@
   `:Enter` and `:enter` both match the `KeyboardEvent.key` value
   \"Enter\".
 
-  On a match, calls the `handler` with event as an argument."
+  On a match, calls the `handler` with `event` as an argument."
   ([key-handlers]
    (fn [event]
      (when-not (.-defaultPrevented event)
