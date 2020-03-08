@@ -8,5 +8,7 @@
 /*.log
 /.rebel_readline_history
 /public/js/compiled
+/.shadow-cljs
+/node_modules
+/yarn.lock
 out
-

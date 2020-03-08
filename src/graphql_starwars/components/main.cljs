@@ -1,7 +1,7 @@
 (ns graphql-starwars.components.main
   (:require [clojure.string :as str]
             [graphql-starwars.route :as route]
-            [graphql-starwars.ui :refer [<comp map> sub>]
+            [sazhet.ui :refer [<comp map> sub>]
              :refer-macros [evt>]]))
 
 (def columns ^{:map>/key-fn identity}

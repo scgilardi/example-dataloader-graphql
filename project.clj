@@ -7,6 +7,7 @@
                                cljsjs/react-dom
                                cljsjs/react-dom-server]]
                  [keechma/toolbox "0.1.24-sq1-SNAPSHOT"]
+                 [sazhet "0.1.0-SNAPSHOT"]
                  [binaryage/devtools "1.0.0"]
                  [funcool/promesa "5.1.0"]
                  [http-kit "2.3.0"]

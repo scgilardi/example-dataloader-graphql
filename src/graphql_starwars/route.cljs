@@ -1,5 +1,5 @@
 (ns graphql-starwars.route
-  (:require [graphql-starwars.ui :refer [<route route>]]))
+  (:require [sazhet.ui :refer [<route route>]]))
 
 (defn get-selected
   "Returns the set of `selected` columns specified by the current route."
